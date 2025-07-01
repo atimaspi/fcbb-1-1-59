@@ -11,20 +11,21 @@ const PublicAPI = () => {
   const [activeEndpoint, setActiveEndpoint] = useState('news');
 
   const endpoints = [
-    { key: 'news', label: 'Notícias', table: 'news' },
-    { key: 'championships', label: 'Competições', table: 'championships' },
-    { key: 'clubs', label: 'Clubes', table: 'clubs' },
-    { key: 'games', label: 'Jogos', table: 'games' },
-    { key: 'gallery', label: 'Galeria', table: 'gallery' },
-    { key: 'national_teams', label: 'Seleções', table: 'national_teams' },
-    { key: 'training_programs', label: 'Formação', table: 'training_programs' },
-    { key: 'broadcasts', label: 'Transmissões', table: 'broadcasts' }
+    { key: 'news', label: 'Notícias', table: 'news' as const },
+    { key: 'championships', label: 'Competições', table: 'championships' as const },
+    { key: 'clubs', label: 'Clubes', table: 'clubs' as const },
+    { key: 'games', label: 'Jogos', table: 'games' as const },
+    { key: 'gallery', label: 'Galeria', table: 'gallery' as const },
+    { key: 'national_teams', label: 'Seleções', table: 'national_teams' as const },
+    { key: 'training_programs', label: 'Formação', table: 'training_programs' as const },
+    { key: 'broadcasts', label: 'Transmissões', table: 'broadcasts' as const }
   ];
 
   const fetchData = async (tableName: string) => {
     setLoading(true);
     try {
-      const { data, error } = await supabase
+      // Use type assertion to handle dynamic table names safely
+      const { data, error } = await (supabase as any)
         .from(tableName)
         .select('*')
         .eq('status', 'publicado')

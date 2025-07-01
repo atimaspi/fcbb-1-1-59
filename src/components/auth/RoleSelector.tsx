@@ -19,20 +19,20 @@ interface RoleSelectorProps {
   onValueChange: (value: DetailedRole) => void;
 }
 
-const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onValueChange }) => {
-  const roleLabels: Record<DetailedRole, string> = {
-    admin: 'Administrador',
-    revisor: 'Revisor',
-    redator: 'Redator',
-    editor: 'Editor',
-    moderator: 'Moderador',
-    treinador: 'Treinador',
-    arbitro: 'Árbitro',
-    dirigente: 'Dirigente',
-    jornalista: 'Jornalista',
-    user: 'Utilizador'
-  };
+export const roleLabels: Record<DetailedRole, string> = {
+  admin: 'Administrador',
+  revisor: 'Revisor',
+  redator: 'Redator',
+  editor: 'Editor',
+  moderator: 'Moderador',
+  treinador: 'Treinador',
+  arbitro: 'Árbitro',
+  dirigente: 'Dirigente',
+  jornalista: 'Jornalista',
+  user: 'Utilizador'
+};
 
+const RoleSelector: React.FC<RoleSelectorProps> = ({ value, onValueChange }) => {
   return (
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger>

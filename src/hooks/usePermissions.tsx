@@ -69,6 +69,22 @@ export const usePermissions = (): PermissionHookReturn => {
     return hasPermission('events', 'create');
   };
 
+  const canManageContent = (contentType: string): boolean => {
+    return hasPermission(contentType, 'create') || hasPermission(contentType, 'edit');
+  };
+
+  const canReviewContent = (): boolean => {
+    return userRole === 'admin' || userRole === 'revisor';
+  };
+
+  const canPublishContent = (): boolean => {
+    return userRole === 'admin' || userRole === 'revisor';
+  };
+
+  const isContentAuthor = (authorId: string): boolean => {
+    return user?.id === authorId;
+  };
+
   return {
     user,
     userRole: getUserRole(),
@@ -80,5 +96,9 @@ export const usePermissions = (): PermissionHookReturn => {
     canManageUsers,
     canManageNews,
     canManageEvents,
+    canManageContent,
+    canReviewContent,
+    canPublishContent,
+    isContentAuthor
   };
 };

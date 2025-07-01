@@ -67,7 +67,8 @@ export const useContentWorkflow = (contentType: string) => {
 
     setLoading(true);
     try {
-      let query = supabase
+      // Use type assertion to handle dynamic table names safely
+      let query = (supabase as any)
         .from(contentType)
         .select('*')
         .order('created_at', { ascending: false });
@@ -81,15 +82,15 @@ export const useContentWorkflow = (contentType: string) => {
       
       if (error) throw error;
       
-      // Transform data to match ContentItem interface
-      const transformedData = (data || []).map(item => ({
+      // Transform data to match ContentItem interface with safe property access
+      const transformedData = (data || []).map((item: any) => ({
         id: item.id,
         title: item.title || item.name || 'Sem título',
         status: item.status || item.status_publicacao || 'rascunho' as ContentStatus,
         author_id: item.author_id || item.created_by,
         reviewer_id: item.reviewer_id,
         created_at: item.created_at,
-        updated_at: item.updated_at,
+        updated_at: item.updated_at || item.created_at,
         scheduled_publish_at: item.scheduled_publish_at
       }));
 
@@ -110,7 +111,7 @@ export const useContentWorkflow = (contentType: string) => {
     if (!isValidContentType(contentType)) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from(contentType)
         .update({ 
           status: 'em_analise',
@@ -148,7 +149,7 @@ export const useContentWorkflow = (contentType: string) => {
     if (!isValidContentType(contentType)) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from(contentType)
         .update({
           status: 'publicado',
@@ -180,7 +181,7 @@ export const useContentWorkflow = (contentType: string) => {
     if (!isValidContentType(contentType)) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from(contentType)
         .update({
           status: 'rejeitado',
@@ -240,7 +241,7 @@ export const useContentWorkflow = (contentType: string) => {
     if (!isValidContentType(contentType)) return;
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from(contentType)
         .update({
           scheduled_publish_at: scheduledDate,
