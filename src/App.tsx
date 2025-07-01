@@ -29,6 +29,11 @@ import CMSAdminPage from "./pages/CMSAdminPage";
 import SelecoesPage from "./pages/SelecoesPage";
 import SelecoesAfroBasketPage from "./pages/SelecoesAfroBasketPage";
 import EstatisticasPage from "./pages/EstatisticasPage";
+import AtletasPage from "./pages/AtletasPage";
+import ArbitragemPage from "./pages/ArbitragemPage";
+import VideosPage from "./pages/VideosPage";
+import TransmissoesPage from "./pages/TransmissoesPage";
+import AreaReservadaPage from "./pages/AreaReservadaPage";
 
 // Competition specific pages
 import MasculinoPage from "./pages/competitions/MasculinoPage";
@@ -105,7 +110,16 @@ function App() {
                   <Route path="/selecoes/senior-masculina" element={<SelecaoMasculinaPage />} />
                   <Route path="/selecoes/senior-feminina" element={<SelecaoFemininaPage />} />
                   <Route path="/selecoes/jovens" element={<SelecoesJovensPage />} />
+                  <Route path="/selecoes/sub-18-masculina" element={<SelecoesJovensPage />} />
+                  <Route path="/selecoes/sub-18-feminina" element={<SelecoesJovensPage />} />
+                  <Route path="/selecoes/sub-16-masculina" element={<SelecoesJovensPage />} />
+                  <Route path="/selecoes/sub-16-feminina" element={<SelecoesJovensPage />} />
                   <Route path="/estatisticas" element={<EstatisticasPage />} />
+                  <Route path="/atletas" element={<AtletasPage />} />
+                  <Route path="/arbitragem" element={<ArbitragemPage />} />
+                  <Route path="/videos" element={<VideosPage />} />
+                  <Route path="/transmissoes" element={<TransmissoesPage />} />
+                  <Route path="/area-reservada" element={<AreaReservadaPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>

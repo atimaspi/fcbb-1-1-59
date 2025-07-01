@@ -2,315 +2,260 @@
 import PageLayout from './PageLayout';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { User, MapPin, Trophy, Search, Filter } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-
-interface Player {
-  id: string;
-  first_name: string;
-  last_name: string;
-  position: string;
-  jersey_number: number;
-  age: number;
-  height_cm: number;
-  weight_kg: number;
-  nationality: string;
-  club: string;
-  photo_url?: string;
-  status: string;
-}
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { User, Award, MapPin, Calendar, Zap, Target } from 'lucide-react';
 
 const AtletasPage = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
-  const [filteredPlayers, setFilteredPlayers] = useState<Player[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [positionFilter, setPositionFilter] = useState('all');
-  const [clubFilter, setClubFilter] = useState('all');
-
-  useEffect(() => {
-    fetchPlayers();
-  }, []);
-
-  useEffect(() => {
-    filterPlayers();
-  }, [players, searchTerm, positionFilter, clubFilter]);
-
-  const fetchPlayers = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('players')
-        .select('*')
-        .eq('active', true)
-        .order('last_name');
-
-      if (error) throw error;
-      setPlayers(data || []);
-    } catch (error) {
-      console.error('Erro ao carregar jogadores:', error);
-      // Dados de exemplo se não houver na BD
-      setPlayers([
-        {
-          id: '1',
-          first_name: 'João',
-          last_name: 'Silva',
-          position: 'Base',
-          jersey_number: 10,
-          age: 25,
-          height_cm: 185,
-          weight_kg: 80,
-          nationality: 'CV',
-          club: 'ABC Praia',
-          status: 'active'
-        },
-        {
-          id: '2',
-          first_name: 'Maria',
-          last_name: 'Santos',
-          position: 'Extremo',
-          jersey_number: 12,
-          age: 23,
-          height_cm: 175,
-          weight_kg: 65,
-          nationality: 'CV',
-          club: 'Sporting Mindelo',
-          status: 'active'
-        },
-        {
-          id: '3',
-          first_name: 'Carlos',
-          last_name: 'Monteiro',
-          position: 'Poste',
-          jersey_number: 15,
-          age: 28,
-          height_cm: 205,
-          weight_kg: 95,
-          nationality: 'CV',
-          club: 'Tchadense',
-          status: 'active'
-        },
-        {
-          id: '4',
-          first_name: 'Ana',
-          last_name: 'Pereira',
-          position: 'Ala',
-          jersey_number: 8,
-          age: 22,
-          height_cm: 170,
-          weight_kg: 60,
-          nationality: 'CV',
-          club: 'Bairro Praia',
-          status: 'active'
-        }
-      ]);
-    } finally {
-      setLoading(false);
+  const featuredAthletes = [
+    {
+      id: 1,
+      name: "Carlos Silva",
+      position: "Pivot",
+      age: 28,
+      height: "2.08m",
+      club: "Sporting CV",
+      nationality: "Cabo Verde",
+      photo: "https://via.placeholder.com/200x250?text=Carlos+Silva",
+      stats: { ppg: 18.5, rpg: 9.2, apg: 2.1 },
+      achievements: ["MVP Liga Nacional 2023", "Melhor Marcador 2022"]
+    },
+    {
+      id: 2,
+      name: "Ana Monteiro",
+      position: "Base",
+      age: 24,
+      height: "1.68m",
+      club: "CD Travadores",
+      nationality: "Cabo Verde",
+      photo: "https://via.placeholder.com/200x250?text=Ana+Monteiro",
+      stats: { ppg: 14.8, rpg: 4.3, apg: 7.9 },
+      achievements: ["Melhor Assistente Liga Feminina 2023"]
+    },
+    {
+      id: 3,
+      name: "João Santos",
+      position: "Extremo",
+      age: 26,
+      height: "1.98m",
+      club: "ABC Basquete",
+      nationality: "Cabo Verde",
+      photo: "https://via.placeholder.com/200x250?text=João+Santos",
+      stats: { ppg: 21.3, rpg: 6.1, apg: 4.2 },
+      achievements: ["Top Scorer Liga Nacional 2023"]
     }
-  };
+  ];
 
-  const filterPlayers = () => {
-    let filtered = players;
+  const youngTalents = [
+    { name: "Pedro Lima", age: 19, position: "Ala", club: "Juventude CV" },
+    { name: "Maria Costa", age: 20, position: "Base", club: "Académica Fem" },
+    { name: "António Pereira", age: 18, position: "Poste", club: "Boavista" }
+  ];
 
-    if (searchTerm) {
-      filtered = filtered.filter(player =>
-        `${player.first_name} ${player.last_name}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        player.club.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    if (positionFilter !== 'all') {
-      filtered = filtered.filter(player => player.position === positionFilter);
-    }
-
-    if (clubFilter !== 'all') {
-      filtered = filtered.filter(player => player.club === clubFilter);
-    }
-
-    setFilteredPlayers(filtered);
-  };
-
-  const getUniquePositions = () => {
-    return [...new Set(players.map(p => p.position))].filter(Boolean);
-  };
-
-  const getUniqueClubs = () => {
-    return [...new Set(players.map(p => p.club))].filter(Boolean);
-  };
-
-  if (loading) {
-    return (
-      <PageLayout title="Atletas" description="Atletas registados na FCBB">
-        <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cv-blue"></div>
-        </div>
-      </PageLayout>
-    );
-  }
+  const nationalTeamPlayers = [
+    { name: "Carlos Silva", caps: 45, position: "Pivot" },
+    { name: "João Santos", caps: 38, position: "Extremo" },
+    { name: "Miguel Rodrigues", caps: 42, position: "Base" }
+  ];
 
   return (
     <PageLayout 
-      title="Atletas" 
-      description="Conheça todos os atletas registados na Federação Cabo-verdiana de Basquetebol"
+      title="Atletas"
+      description="Conheça os melhores atletas do basquetebol cabo-verdiano"
     >
-      <div className="space-y-6">
-        {/* Filtros */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Filter className="w-5 h-5 mr-2 text-cv-blue" />
-              Filtros de Pesquisa
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Pesquisar por nome ou clube..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              
-              <Select value={positionFilter} onValueChange={setPositionFilter}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Posição" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todas as posições</SelectItem>
-                  {getUniquePositions().map((position) => (
-                    <SelectItem key={position} value={position}>
-                      {position}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={clubFilter} onValueChange={setClubFilter}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Clube" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos os clubes</SelectItem>
-                  {getUniqueClubs().map((club) => (
-                    <SelectItem key={club} value={club}>
-                      {club}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Estatísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card>
+      <div className="space-y-8">
+        {/* Estatísticas Gerais */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Card className="bg-gradient-to-br from-blue-500 to-cv-blue text-white">
             <CardContent className="p-6 text-center">
-              <div className="text-2xl font-bold text-cv-blue">{players.length}</div>
-              <div className="text-sm text-gray-600">Total de Atletas</div>
+              <User className="w-12 h-12 mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">450+</div>
+              <div className="text-sm opacity-90">Atletas Registados</div>
             </CardContent>
           </Card>
-          <Card>
+          
+          <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
             <CardContent className="p-6 text-center">
-              <div className="text-2xl font-bold text-cv-blue">{getUniqueClubs().length}</div>
-              <div className="text-sm text-gray-600">Clubes</div>
+              <Award className="w-12 h-12 mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">125</div>
+              <div className="text-sm opacity-90">Atletas Premiados</div>
             </CardContent>
           </Card>
-          <Card>
+          
+          <Card className="bg-gradient-to-br from-orange-500 to-red-500 text-white">
             <CardContent className="p-6 text-center">
-              <div className="text-2xl font-bold text-cv-blue">{getUniquePositions().length}</div>
-              <div className="text-sm text-gray-600">Posições</div>
+              <Target className="w-12 h-12 mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">45</div>
+              <div className="text-sm opacity-90">Seleção Nacional</div>
             </CardContent>
           </Card>
-          <Card>
+          
+          <Card className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
             <CardContent className="p-6 text-center">
-              <div className="text-2xl font-bold text-cv-blue">
-                {Math.round(players.reduce((acc, p) => acc + (p.age || 0), 0) / players.length) || 0}
-              </div>
-              <div className="text-sm text-gray-600">Idade Média</div>
+              <Zap className="w-12 h-12 mx-auto mb-4" />
+              <div className="text-3xl font-bold mb-2">89</div>
+              <div className="text-sm opacity-90">Jovens Talentos</div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Lista de Atletas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredPlayers.map((player) => (
-            <Card key={player.id} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="text-center mb-4">
-                  {player.photo_url ? (
-                    <img
-                      src={player.photo_url}
-                      alt={`${player.first_name} ${player.last_name}`}
-                      className="w-20 h-20 rounded-full mx-auto object-cover"
+        <Tabs defaultValue="featured" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="featured">Atletas Destaque</TabsTrigger>
+            <TabsTrigger value="national">Seleção Nacional</TabsTrigger>
+            <TabsTrigger value="youth">Jovens Talentos</TabsTrigger>
+            <TabsTrigger value="stats">Estatísticas</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="featured" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredAthletes.map((athlete) => (
+                <Card key={athlete.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="relative">
+                    <img 
+                      src={athlete.photo} 
+                      alt={athlete.name}
+                      className="w-full h-64 object-cover"
                     />
-                  ) : (
-                    <div className="w-20 h-20 rounded-full mx-auto bg-gray-200 flex items-center justify-center">
-                      <User className="w-8 h-8 text-gray-400" />
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-cv-blue">{athlete.position}</Badge>
                     </div>
-                  )}
-                  
-                  <h3 className="font-bold text-lg mt-3">
-                    {player.first_name} {player.last_name}
-                  </h3>
-                  
-                  <div className="flex items-center justify-center space-x-2 mt-2">
-                    <Badge variant="secondary">#{player.jersey_number}</Badge>
-                    <Badge variant="outline">{player.position}</Badge>
                   </div>
-                </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-2">{athlete.name}</h3>
+                    <div className="space-y-2 text-sm text-gray-600 mb-4">
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        {athlete.age} anos • {athlete.height}
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        {athlete.club}
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-4 mb-4">
+                      <div className="text-center">
+                        <div className="font-bold text-cv-blue">{athlete.stats.ppg}</div>
+                        <div className="text-xs text-gray-500">PPG</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="font-bold text-cv-blue">{athlete.stats.rpg}</div>
+                        <div className="text-xs text-gray-500">RPG</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="font-bold text-cv-blue">{athlete.stats.apg}</div>
+                        <div className="text-xs text-gray-500">APG</div>
+                      </div>
+                    </div>
 
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Clube:</span>
-                    <span className="font-medium">{player.club}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Idade:</span>
-                    <span className="font-medium">{player.age} anos</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Altura:</span>
-                    <span className="font-medium">{player.height_cm} cm</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Peso:</span>
-                    <span className="font-medium">{player.weight_kg} kg</span>
-                  </div>
+                    <div className="space-y-1">
+                      {athlete.achievements.map((achievement, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {achievement}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Nacionalidade:</span>
-                    <span className="font-medium">
-                      {player.nationality === 'CV' ? 'Cabo Verde' : player.nationality}
-                    </span>
-                  </div>
+          <TabsContent value="national" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Convocados Atuais da Seleção Nacional</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {nationalTeamPlayers.map((player, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                      <div>
+                        <div className="font-semibold">{player.name}</div>
+                        <div className="text-sm text-gray-600">{player.position}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-cv-blue">{player.caps}</div>
+                        <div className="text-xs text-gray-500">jogos</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+          </TabsContent>
 
-        {filteredPlayers.length === 0 && (
-          <Card className="text-center py-12">
-            <CardContent>
-              <User className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Nenhum atleta encontrado
-              </h3>
-              <p className="text-gray-600">
-                Tente ajustar os filtros de pesquisa.
-              </p>
-            </CardContent>
-          </Card>
-        )}
+          <TabsContent value="youth" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Promessas do Basquetebol Cabo-verdiano</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {youngTalents.map((talent, index) => (
+                    <div key={index} className="text-center p-6 bg-gradient-to-br from-blue-50 to-cv-blue/10 rounded-lg">
+                      <div className="w-20 h-20 bg-cv-blue/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <User className="w-10 h-10 text-cv-blue" />
+                      </div>
+                      <h3 className="font-bold text-lg mb-2">{talent.name}</h3>
+                      <p className="text-gray-600 mb-1">{talent.age} anos</p>
+                      <p className="text-sm text-gray-500 mb-2">{talent.position}</p>
+                      <Badge variant="outline">{talent.club}</Badge>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="stats" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Top Marcadores Liga Nacional</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                      <span className="font-semibold">1. João Santos</span>
+                      <span className="font-bold text-yellow-600">21.3 PPG</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border-l-4 border-gray-400">
+                      <span className="font-semibold">2. Carlos Silva</span>
+                      <span className="font-bold text-gray-600">18.5 PPG</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400">
+                      <span className="font-semibold">3. Miguel Costa</span>
+                      <span className="font-bold text-orange-600">16.8 PPG</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Melhores Assistentes</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                      <span className="font-semibold">1. Ana Monteiro</span>
+                      <span className="font-bold text-blue-600">7.9 APG</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+                      <span className="font-semibold">2. Pedro Lima</span>
+                      <span className="font-bold text-green-600">6.2 APG</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                      <span className="font-semibold">3. Rui Santos</span>
+                      <span className="font-bold text-purple-600">5.8 APG</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </PageLayout>
   );
