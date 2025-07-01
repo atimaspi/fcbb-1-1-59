@@ -154,8 +154,7 @@ const AdminUserRegistration = () => {
           
           <RoleSelector
             value={selectedRole}
-            onChange={setSelectedRole}
-            showDescription={true}
+            onValueChange={setSelectedRole}
           />
 
           {error && (

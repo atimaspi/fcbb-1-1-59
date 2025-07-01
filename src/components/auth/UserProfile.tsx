@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -8,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { User, LogOut } from 'lucide-react';
-import { ROLE_LABELS, DetailedRole } from './RoleSelector';
+import { roleLabels, DetailedRole } from './RoleSelector';
 
 interface Profile {
   id: string;
@@ -182,7 +183,7 @@ const UserProfile = () => {
             <div>
               <Label className="text-sm font-medium text-gray-500">Função</Label>
               <p className="mt-1 text-sm text-gray-900">
-                {profile?.role ? ROLE_LABELS[profile.role] : 'Utilizador'}
+                {profile?.role ? roleLabels[profile.role] : 'Utilizador'}
               </p>
             </div>
           </div>
