@@ -51,6 +51,81 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          id: string
+          ip_address: string | null
+          new_values: Json | null
+          old_values: Json | null
+          record_id: string | null
+          table_name: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: string | null
+          table_name: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          new_values?: Json | null
+          old_values?: Json | null
+          record_id?: string | null
+          table_name?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      backups: {
+        Row: {
+          backup_name: string
+          backup_type: string | null
+          created_at: string | null
+          created_by: string | null
+          expires_at: string | null
+          file_path: string
+          file_size: number
+          id: string
+          status: string | null
+        }
+        Insert: {
+          backup_name: string
+          backup_type?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          expires_at?: string | null
+          file_path: string
+          file_size: number
+          id?: string
+          status?: string | null
+        }
+        Update: {
+          backup_name?: string
+          backup_type?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          expires_at?: string | null
+          file_path?: string
+          file_size?: number
+          id?: string
+          status?: string | null
+        }
+        Relationships: []
+      }
       basketball_stats: {
         Row: {
           active: boolean | null
@@ -193,6 +268,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      categories: {
+        Row: {
+          active: boolean | null
+          color: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          order_index: number | null
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          order_index?: number | null
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          order_index?: number | null
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       championship_history: {
         Row: {
@@ -539,6 +650,68 @@ export type Database = {
           subject?: string | null
         }
         Relationships: []
+      }
+      documents: {
+        Row: {
+          category_id: string | null
+          created_at: string | null
+          description: string | null
+          document_type: string | null
+          download_count: number | null
+          featured: boolean | null
+          file_name: string
+          file_size: number
+          file_type: string
+          file_url: string
+          id: string
+          status: string | null
+          title: string
+          updated_at: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          document_type?: string | null
+          download_count?: number | null
+          featured?: boolean | null
+          file_name: string
+          file_size: number
+          file_type: string
+          file_url: string
+          id?: string
+          status?: string | null
+          title: string
+          updated_at?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          document_type?: string | null
+          download_count?: number | null
+          featured?: boolean | null
+          file_name?: string
+          file_size?: number
+          file_type?: string
+          file_url?: string
+          id?: string
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documents_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       events: {
         Row: {
@@ -954,6 +1127,80 @@ export type Database = {
         }
         Relationships: []
       }
+      media: {
+        Row: {
+          alt_text: string | null
+          category_id: string | null
+          created_at: string | null
+          description: string | null
+          duration: number | null
+          file_name: string
+          file_size: number
+          file_type: string
+          file_url: string
+          folder_path: string | null
+          height: number | null
+          id: string
+          mime_type: string
+          original_filename: string
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+          uploaded_by: string | null
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          category_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          duration?: number | null
+          file_name: string
+          file_size: number
+          file_type: string
+          file_url: string
+          folder_path?: string | null
+          height?: number | null
+          id?: string
+          mime_type: string
+          original_filename: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+          uploaded_by?: string | null
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          category_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          duration?: number | null
+          file_name?: string
+          file_size?: number
+          file_type?: string
+          file_url?: string
+          folder_path?: string | null
+          height?: number | null
+          id?: string
+          mime_type?: string
+          original_filename?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+          uploaded_by?: string | null
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "media_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       media_files: {
         Row: {
           alt_text: string | null
@@ -1007,6 +1254,50 @@ export type Database = {
           uploaded_by?: string | null
         }
         Relationships: []
+      }
+      menus: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          icon: string | null
+          id: string
+          name: string
+          order_index: number | null
+          parent_id: string | null
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          order_index?: number | null
+          parent_id?: string | null
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          order_index?: number | null
+          parent_id?: string | null
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "menus_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "menus"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       national_team_callups: {
         Row: {
@@ -1560,6 +1851,77 @@ export type Database = {
           },
         ]
       }
+      posts: {
+        Row: {
+          author_id: string | null
+          category_id: string | null
+          content: string
+          created_at: string | null
+          excerpt: string | null
+          featured: boolean | null
+          featured_image_url: string | null
+          gallery_images: Json | null
+          id: string
+          meta_description: string | null
+          meta_title: string | null
+          post_type: string | null
+          published_at: string | null
+          slug: string
+          status: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          category_id?: string | null
+          content: string
+          created_at?: string | null
+          excerpt?: string | null
+          featured?: boolean | null
+          featured_image_url?: string | null
+          gallery_images?: Json | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          post_type?: string | null
+          published_at?: string | null
+          slug: string
+          status?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          category_id?: string | null
+          content?: string
+          created_at?: string | null
+          excerpt?: string | null
+          featured?: boolean | null
+          featured_image_url?: string | null
+          gallery_images?: Json | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          post_type?: string | null
+          published_at?: string | null
+          slug?: string
+          status?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       product_categories: {
         Row: {
           active: boolean | null
@@ -1999,6 +2361,10 @@ export type Database = {
         Returns: undefined
       }
       cleanup_orphaned_media: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      create_automatic_backup: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
