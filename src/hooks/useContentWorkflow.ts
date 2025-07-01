@@ -11,12 +11,20 @@ interface ContentItem {
   id: string;
   title: string;
   status: ContentStatus;
-  author_id: string;
+  author_id?: string;
   reviewer_id?: string;
   created_at: string;
   updated_at: string;
   scheduled_publish_at?: string;
 }
+
+const VALID_CONTENT_TYPES = [
+  'news', 'championships', 'clubs', 'games', 'national_teams', 
+  'referees', 'training_programs', 'gallery', 'broadcasts', 
+  'federation_members', 'documents'
+] as const;
+
+type ValidContentType = typeof VALID_CONTENT_TYPES[number];
 
 export const useContentWorkflow = (contentType: string) => {
   const [items, setItems] = useState<ContentItem[]>([]);
@@ -24,6 +32,11 @@ export const useContentWorkflow = (contentType: string) => {
   const [userRole, setUserRole] = useState<UserRole>('redator');
   const { user } = useAuth();
   const { toast } = useToast();
+
+  // Validate content type
+  const isValidContentType = (type: string): type is ValidContentType => {
+    return VALID_CONTENT_TYPES.includes(type as ValidContentType);
+  };
 
   // Fetch user role
   useEffect(() => {
@@ -46,6 +59,12 @@ export const useContentWorkflow = (contentType: string) => {
 
   // Fetch content items
   const fetchItems = async () => {
+    if (!isValidContentType(contentType)) {
+      console.error(`Invalid content type: ${contentType}`);
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     try {
       let query = supabase
@@ -61,7 +80,20 @@ export const useContentWorkflow = (contentType: string) => {
       const { data, error } = await query;
       
       if (error) throw error;
-      setItems(data || []);
+      
+      // Transform data to match ContentItem interface
+      const transformedData = (data || []).map(item => ({
+        id: item.id,
+        title: item.title || item.name || 'Sem título',
+        status: item.status || item.status_publicacao || 'rascunho' as ContentStatus,
+        author_id: item.author_id || item.created_by,
+        reviewer_id: item.reviewer_id,
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+        scheduled_publish_at: item.scheduled_publish_at
+      }));
+
+      setItems(transformedData);
     } catch (error: any) {
       toast({
         title: "Erro",
@@ -75,6 +107,8 @@ export const useContentWorkflow = (contentType: string) => {
 
   // Submit for review
   const submitForReview = async (itemId: string) => {
+    if (!isValidContentType(contentType)) return;
+
     try {
       const { error } = await supabase
         .from(contentType)
@@ -111,6 +145,8 @@ export const useContentWorkflow = (contentType: string) => {
 
   // Approve content
   const approveContent = async (itemId: string) => {
+    if (!isValidContentType(contentType)) return;
+
     try {
       const { error } = await supabase
         .from(contentType)
@@ -141,6 +177,8 @@ export const useContentWorkflow = (contentType: string) => {
 
   // Reject content
   const rejectContent = async (itemId: string, reason: string) => {
+    if (!isValidContentType(contentType)) return;
+
     try {
       const { error } = await supabase
         .from(contentType)
@@ -199,6 +237,8 @@ export const useContentWorkflow = (contentType: string) => {
 
   // Schedule publication
   const schedulePublication = async (itemId: string, scheduledDate: string) => {
+    if (!isValidContentType(contentType)) return;
+
     try {
       const { error } = await supabase
         .from(contentType)

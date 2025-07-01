@@ -19,4 +19,8 @@ export interface PermissionHookReturn {
   canManageUsers: () => boolean;
   canManageNews: () => boolean;
   canManageEvents: () => boolean;
+  canManageContent: (contentType: string) => boolean;
+  canReviewContent: () => boolean;
+  canPublishContent: () => boolean;
+  isContentAuthor: (authorId: string) => boolean;
 }
