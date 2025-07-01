@@ -1,10 +1,9 @@
-
 import PageLayout from './PageLayout';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Whistle, Users, Calendar, BookOpen, Award, CheckCircle } from 'lucide-react';
+import { Target, Users, Calendar, BookOpen, Award, CheckCircle } from 'lucide-react';
 
 const ArbitragemPage = () => {
   const referees = [
@@ -78,7 +77,7 @@ const ArbitragemPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card className="bg-gradient-to-br from-blue-500 to-cv-blue text-white">
             <CardContent className="p-6 text-center">
-              <Whistle className="w-12 h-12 mx-auto mb-4" />
+              <Target className="w-12 h-12 mx-auto mb-4" />
               <div className="text-3xl font-bold mb-2">85</div>
               <div className="text-sm opacity-90">Árbitros Ativos</div>
             </CardContent>
