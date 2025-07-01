@@ -1,0 +1,166 @@
+
+@layer components {
+  .cv-container {
+    @apply container max-w-7xl px-4 mx-auto;
+  }
+  
+  .nav-link {
+    @apply text-cv-dark dark:text-gray-200 hover:text-cv-blue dark:hover:text-blue-400 transition-all duration-300 font-medium focus-visible-cv relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-cv-blue dark:bg-blue-400 transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .nav-link-mobile {
+    @apply block py-3 px-4 text-cv-dark dark:text-gray-200 hover:bg-cv-blue dark:hover:bg-blue-600 hover:text-white transition-all duration-300 focus-visible-cv rounded-lg;
+  }
+  
+  .btn-primary {
+    @apply bg-cv-blue hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 focus-visible-cv hover:shadow-lg hover:shadow-blue-500/25 active:scale-95 font-display;
+  }
+  
+  .btn-secondary {
+    @apply bg-cv-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 focus-visible-cv hover:shadow-lg hover:shadow-red-500/25 active:scale-95 font-display;
+  }
+
+  .btn-glass {
+    @apply glass-button text-cv-blue dark:text-blue-400 font-semibold py-3 px-6 rounded-xl hover:scale-105 focus-visible-cv;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-cv-blue dark:text-blue-400 border-b-4 border-cv-yellow dark:border-yellow-400 pb-2 mb-8 font-display;
+  }
+
+  .bg-cv-gradient {
+    background: linear-gradient(135deg, #003893 0%, #CF2027 50%, #F7D116 100%);
+  }
+
+  .bg-cv-gradient-blue-red {
+    background: linear-gradient(135deg, #003893 0%, #CF2027 100%);
+  }
+
+  /* News and competition cards with glassmorphism */
+  .news-card {
+    @apply modern-card hover-lift border-l-4 border-cv-blue dark:border-blue-400 focus-within:ring-2 focus-within:ring-cv-blue dark:focus-within:ring-blue-400 focus-within:ring-opacity-50;
+  }
+
+  .competition-card {
+    @apply modern-card hover-lift border-l-4 border-cv-red dark:border-red-400 focus-within:ring-2 focus-within:ring-cv-red dark:focus-within:ring-red-400 focus-within:ring-opacity-50 p-6;
+  }
+
+  /* Typography with new fonts */
+  .heading-xl {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-cv-blue dark:text-blue-400 font-display;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-cv-blue dark:text-blue-400 font-display;
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold text-cv-blue dark:text-blue-400 font-display;
+  }
+
+  /* Spacing */
+  .section-spacing {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .content-spacing {
+    @apply py-12 md:py-16;
+  }
+
+  /* Enhanced menu and dropdown improvements */
+  .dropdown-menu {
+    @apply glass-card shadow-2xl border border-white/20 dark:border-gray-800/20 rounded-xl z-50 min-w-max;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-3 text-sm text-cv-dark dark:text-gray-200 hover:bg-cv-blue dark:hover:bg-blue-600 hover:text-white transition-all duration-300 focus-visible-cv rounded-lg mx-2 my-1;
+  }
+
+  /* Enhanced form validation states */
+  .form-field-error {
+    @apply border-red-500 focus:ring-red-500 focus:border-red-500 dark:border-red-400 dark:focus:ring-red-400 dark:focus:border-red-400;
+  }
+
+  .form-field-success {
+    @apply border-green-500 focus:ring-green-500 focus:border-green-500 dark:border-green-400 dark:focus:ring-green-400 dark:focus:border-green-400;
+  }
+
+  /* Enhanced loading states */
+  .loading-skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded-lg;
+  }
+
+  /* Enhanced card interactions */
+  .card-interactive {
+    @apply modern-card hover-lift cursor-pointer focus-within:ring-2 focus-within:ring-cv-blue dark:focus-within:ring-blue-400 focus-within:ring-opacity-50;
+  }
+
+  /* Enhanced tooltip styling */
+  .tooltip {
+    @apply glass-card text-white text-sm px-3 py-2 rounded-lg shadow-lg z-50;
+  }
+
+  /* Hero section styles */
+  .hero-gradient {
+    background: linear-gradient(135deg, rgba(0, 56, 147, 0.8) 0%, rgba(207, 32, 39, 0.6) 50%, rgba(247, 209, 22, 0.4) 100%);
+  }
+
+  .hero-text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Animated elements */
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 0.8s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.8s ease-out forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}

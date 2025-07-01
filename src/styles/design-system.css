@@ -1,0 +1,276 @@
+
+/* FCBB Design System - Variáveis Globais */
+:root {
+  /* Cores Principais */
+  --cv-blue: #003893;
+  --cv-red: #CF2027;
+  --cv-yellow: #F7D116;
+  --cv-green: #00A651;
+  --cv-black: #1a1a1a;
+  --cv-white: #ffffff;
+  
+  /* Variações de Azul */
+  --cv-blue-light: #0056d3;
+  --cv-blue-dark: #002366;
+  --cv-blue-50: #e6f0ff;
+  --cv-blue-100: #b3d1ff;
+  --cv-blue-200: #80b3ff;
+  --cv-blue-300: #4d94ff;
+  --cv-blue-400: #1a75ff;
+  --cv-blue-500: #003893;
+  --cv-blue-600: #002d75;
+  --cv-blue-700: #002257;
+  --cv-blue-800: #001739;
+  --cv-blue-900: #000c1c;
+  
+  /* Escalas de Cinza */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Tipografia */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  /* Tamanhos de Fonte */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  /* Espaçamentos */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Raios de Borda */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  
+  /* Transições */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* Utilitários de Cores */
+.text-cv-blue { color: var(--cv-blue); }
+.text-cv-red { color: var(--cv-red); }
+.text-cv-yellow { color: var(--cv-yellow); }
+.text-cv-green { color: var(--cv-green); }
+
+.bg-cv-blue { background-color: var(--cv-blue); }
+.bg-cv-red { background-color: var(--cv-red); }
+.bg-cv-yellow { background-color: var(--cv-yellow); }
+.bg-cv-green { background-color: var(--cv-green); }
+
+.border-cv-blue { border-color: var(--cv-blue); }
+.border-cv-red { border-color: var(--cv-red); }
+.border-cv-yellow { border-color: var(--cv-yellow); }
+
+/* Componentes Base */
+.fcbb-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.fcbb-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fcbb-button--primary {
+  background-color: var(--cv-blue);
+  color: var(--cv-white);
+}
+
+.fcbb-button--primary:hover:not(:disabled) {
+  background-color: var(--cv-blue-dark);
+}
+
+.fcbb-button--secondary {
+  background-color: transparent;
+  color: var(--cv-blue);
+  border-color: var(--cv-blue);
+}
+
+.fcbb-button--secondary:hover:not(:disabled) {
+  background-color: var(--cv-blue-50);
+}
+
+.fcbb-card {
+  background-color: var(--cv-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-fast);
+}
+
+.fcbb-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.fcbb-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  transition: all var(--transition-fast);
+}
+
+.fcbb-input:focus {
+  outline: none;
+  border-color: var(--cv-blue);
+  box-shadow: 0 0 0 3px rgba(0, 56, 147, 0.1);
+}
+
+.fcbb-input:invalid {
+  border-color: var(--cv-red);
+}
+
+/* Layout Utilitários */
+.cv-container {
+  max-width: var(--breakpoint-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.cv-section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.cv-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.cv-grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.cv-grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.cv-grid--4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cv-container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .cv-section {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .cv-grid--2,
+  .cv-grid--3,
+  .cv-grid--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-nav {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--cv-blue);
+  color: var(--cv-white);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  z-index: 100;
+}
+
+.skip-nav:focus {
+  top: 6px;
+}
+
+/* Estados de Foco */
+.focus-visible:focus {
+  outline: 2px solid var(--cv-blue);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  * {
+    color: black !important;
+    background: white !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

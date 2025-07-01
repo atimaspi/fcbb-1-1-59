@@ -1,0 +1,57 @@
+
+{
+  "competitions": [
+    {
+      "id": 1,
+      "name": "Liga Nacional de Basquetebol",
+      "type": "Liga",
+      "season": "2024",
+      "status": "Ativa",
+      "description": "Principal competição nacional de basquetebol masculino.",
+      "participants": 12,
+      "startDate": "2024-03-01",
+      "endDate": "2024-11-30",
+      "currentChampion": "Académica do Mindelo",
+      "website": "https://fcbb.cv/liga-nacional"
+    },
+    {
+      "id": 2,
+      "name": "Taça de Cabo Verde",
+      "type": "Taça",
+      "season": "2024",
+      "status": "Ativa",
+      "description": "Competição eliminatória nacional de basquetebol.",
+      "participants": 16,
+      "startDate": "2024-05-01",
+      "endDate": "2024-09-15",
+      "currentChampion": "CD Travadores",
+      "website": "https://fcbb.cv/taca-cabo-verde"
+    },
+    {
+      "id": 3,
+      "name": "Super Taça",
+      "type": "Super Taça",
+      "season": "2024",
+      "status": "Programada",
+      "description": "Disputa entre o campeão da Liga e o vencedor da Taça.",
+      "participants": 2,
+      "startDate": "2024-12-15",
+      "endDate": "2024-12-15",
+      "currentChampion": "Académica do Mindelo",
+      "website": "https://fcbb.cv/super-taca"
+    },
+    {
+      "id": 4,
+      "name": "Liga Feminina",
+      "type": "Liga",
+      "season": "2024",
+      "status": "Ativa",
+      "description": "Principal competição nacional de basquetebol feminino.",
+      "participants": 8,
+      "startDate": "2024-04-01",
+      "endDate": "2024-10-30",
+      "currentChampion": "Sporting da Praia",
+      "website": "https://fcbb.cv/liga-feminina"
+    }
+  ]
+}

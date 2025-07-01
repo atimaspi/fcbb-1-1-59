@@ -1,0 +1,61 @@
+
+{
+  "clubs": [
+    {
+      "id": 1,
+      "name": "CD Travadores",
+      "island": "Santiago",
+      "founded": 1975,
+      "logo": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=200&h=200&fit=crop",
+      "description": "Clube histórico de Santiago, um dos pioneiros do basquetebol cabo-verdiano.",
+      "championships": 3,
+      "website": "https://cdtravadores.cv",
+      "social": {
+        "facebook": "https://facebook.com/cdtravadores",
+        "instagram": "https://instagram.com/cdtravadores"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Académica do Mindelo",
+      "island": "São Vicente",
+      "founded": 1967,
+      "logo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=200&h=200&fit=crop",
+      "description": "O maior clube de São Vicente com tradição no basquetebol nacional.",
+      "championships": 5,
+      "website": "https://academicamindelo.cv",
+      "social": {
+        "facebook": "https://facebook.com/academicamindelo",
+        "instagram": "https://instagram.com/academicamindelo"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Sporting da Praia",
+      "island": "Santiago",
+      "founded": 1968,
+      "logo": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=200&h=200&fit=crop",
+      "description": "Clube da capital com forte presença nas competições nacionais.",
+      "championships": 2,
+      "website": "https://sportingpraia.cv",
+      "social": {
+        "facebook": "https://facebook.com/sportingpraia",
+        "instagram": "https://instagram.com/sportingpraia"
+      }
+    },
+    {
+      "id": 4,
+      "name": "FC Derby",
+      "island": "Santiago",
+      "founded": 1945,
+      "logo": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=200&h=200&fit=crop",
+      "description": "Um dos clubes mais antigos e tradicionais de Cabo Verde.",
+      "championships": 4,
+      "website": "https://fcderby.cv",
+      "social": {
+        "facebook": "https://facebook.com/fcderby",
+        "instagram": "https://instagram.com/fcderby"
+      }
+    }
+  ]
+}

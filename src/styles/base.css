@@ -1,0 +1,171 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 216 87% 29%; /* Azul da bandeira de CV */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 0 76% 48%; /* Vermelho da bandeira de CV */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 216 87% 29%;
+
+    --radius: 0.5rem;
+
+    /* Cores da bandeira de Cabo Verde */
+    --primary-color: #002b7f;
+    --secondary-color: #ffcc00;
+    --accent-color: #ce1126;
+    --white: #ffffff;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Enhanced smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Cape Verde color palette utilities with dark mode support */
+.text-cv-primary { 
+  color: var(--primary-color); 
+}
+.dark .text-cv-primary { 
+  color: #4A9EFF; 
+}
+
+.text-cv-secondary { 
+  color: var(--secondary-color); 
+}
+.dark .text-cv-secondary { 
+  color: #FFE066; 
+}
+
+.text-cv-accent { 
+  color: var(--accent-color); 
+}
+.dark .text-cv-accent { 
+  color: #FF6B6B; 
+}
+
+.bg-cv-primary { 
+  background-color: var(--primary-color); 
+}
+.dark .bg-cv-primary { 
+  background-color: #1e40af; 
+}
+
+.bg-cv-secondary { 
+  background-color: var(--secondary-color); 
+}
+.dark .bg-cv-secondary { 
+  background-color: #fbbf24; 
+}
+
+.bg-cv-accent { 
+  background-color: var(--accent-color); 
+}
+.dark .bg-cv-accent { 
+  background-color: #dc2626; 
+}
+
+/* Gradientes da bandeira */
+.bg-cv-gradient {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 50%, var(--secondary-color) 100%);
+}
+
+.bg-cv-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+}
+
+/* Glassmorphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}

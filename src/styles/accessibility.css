@@ -1,0 +1,77 @@
+
+/* High Contrast Mode */
+.high-contrast {
+  --cv-primary: #000000;
+  --cv-secondary: #ffffff;
+  --cv-accent: #ffff00;
+  --cv-white: #ffffff;
+}
+
+.high-contrast * {
+  border-color: #000000 !important;
+}
+
+.high-contrast .bg-cv-blue {
+  background-color: #000000 !important;
+}
+
+.high-contrast .text-cv-blue {
+  color: #000000 !important;
+}
+
+.high-contrast .bg-cv-yellow {
+  background-color: #ffff00 !important;
+}
+
+.high-contrast .text-cv-yellow {
+  color: #ffff00 !important;
+}
+
+.high-contrast .text-white {
+  color: #ffffff !important;
+}
+
+.high-contrast .bg-white {
+  background-color: #ffffff !important;
+}
+
+/* Focus indicators for accessibility */
+@layer components {
+  .focus-visible-cv {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cv-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-cv-blue;
+  }
+}
+
+.focus\:ring-cv-yellow:focus {
+  --tw-ring-color: #FDB927;
+}
+
+.focus\:ring-offset-cv-blue:focus {
+  --tw-ring-offset-color: #002868;
+}
+
+/* Skip link styles */
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Keyboard navigation improvements */
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+/* Improved focus indicators */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #FDB927;
+  outline-offset: 2px;
+}

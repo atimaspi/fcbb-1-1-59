@@ -1,0 +1,174 @@
+
+@layer utilities {
+  /* Premium 3D Effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* Enhanced Glow Effects */
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 56, 147, 0.6), 0 0 40px rgba(0, 56, 147, 0.4), 0 0 60px rgba(0, 56, 147, 0.2);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 20px rgba(207, 32, 39, 0.6), 0 0 40px rgba(207, 32, 39, 0.4), 0 0 60px rgba(207, 32, 39, 0.2);
+  }
+
+  .glow-yellow {
+    box-shadow: 0 0 20px rgba(247, 209, 22, 0.6), 0 0 40px rgba(247, 209, 22, 0.4), 0 0 60px rgba(247, 209, 22, 0.2);
+  }
+
+  /* Morphing Animations */
+  @keyframes morph {
+    0%, 100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  .animate-morph {
+    animation: morph 8s ease-in-out infinite;
+  }
+
+  /* Advanced Float Animation */
+  @keyframes float-advanced {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-10px) rotate(5deg);
+    }
+    66% {
+      transform: translateY(5px) rotate(-3deg);
+    }
+  }
+
+  .animate-float-advanced {
+    animation: float-advanced 6s ease-in-out infinite;
+  }
+
+  /* Pulsing Glow */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px currentColor;
+    }
+    50% {
+      box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Gradient Animation */
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* Text Glow Effect */
+  .text-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+
+  /* Card Flip Animation */
+  @keyframes flip-card {
+    0% {
+      transform: rotateY(0);
+    }
+    100% {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .animate-flip {
+    animation: flip-card 0.6s ease-in-out;
+  }
+
+  /* Particle Effects */
+  @keyframes particle-float {
+    0% {
+      transform: translateY(100vh) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-particle {
+    animation: particle-float 10s linear infinite;
+  }
+
+  /* Magnetic Hover Effect */
+  .magnetic-hover {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .magnetic-hover:hover {
+    transform: scale(1.1) translateY(-5px);
+  }
+
+  /* Neon Border Effect */
+  .neon-border {
+    position: relative;
+    background: linear-gradient(45deg, transparent, rgba(0, 56, 147, 0.5), transparent);
+    border-radius: 16px;
+    padding: 2px;
+  }
+
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    background: linear-gradient(45deg, #003893, #CF2027, #F7D116, #003893);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.7;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Holographic Effect */
+  .holographic {
+    background: linear-gradient(
+      45deg,
+      rgba(255, 0, 150, 0.1),
+      rgba(0, 255, 255, 0.1),
+      rgba(255, 255, 0, 0.1),
+      rgba(255, 0, 150, 0.1)
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 4s ease infinite;
+  }
+}
